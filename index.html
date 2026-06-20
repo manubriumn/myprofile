@@ -84,40 +84,40 @@
   .hero{
     position:relative; z-index:1;
     max-width: 1180px; margin:0 auto;
-    padding: 90px 28px 70px;
+    padding: 56px 28px 48px;
     display:grid;
     grid-template-columns: 1.4fr 1fr;
-    gap: 50px;
+    gap: 40px;
     align-items: center;
   }
   .eyebrow{
     font-family: var(--mono); font-size:12px; letter-spacing:0.18em;
     color: var(--green); text-transform:uppercase;
-    display:flex; align-items:center; gap:10px; margin-bottom:22px;
+    display:flex; align-items:center; gap:10px; margin-bottom:14px;
   }
   .eyebrow::before{ content:''; width:24px; height:1px; background:var(--green); }
 
   h1{
     font-family: var(--mono); font-weight:800;
     font-size: clamp(2.2rem, 5vw, 3.6rem);
-    line-height:1.05; letter-spacing:-0.01em;
+    line-height:0.98; letter-spacing:-0.02em;
     color:#fff;
   }
-  h1 .accent{ color: var(--green); }
+  h1 .accent{ color:#fff; }
 
   .hero-role{
     font-family: var(--mono); font-size: 14px; color: var(--amber);
-    margin-top:16px; letter-spacing:0.02em;
+    margin-top:10px; letter-spacing:0.02em;
   }
 
   .hero-desc{
-    margin-top: 20px; max-width: 56ch;
+    margin-top: 14px; max-width: 56ch;
     color: var(--text-dim); font-size: 15.5px;
   }
 
   .hero-meta{
-    display:flex; flex-wrap:wrap; gap: 10px 22px;
-    margin-top: 28px; font-family: var(--mono); font-size:12.5px; color: var(--text-faint);
+    display:flex; flex-wrap:wrap; gap: 8px 22px;
+    margin-top: 18px; font-family: var(--mono); font-size:12.5px; color: var(--text-faint);
   }
   .hero-meta a{ color: var(--text-dim); text-decoration:none; border-bottom:1px solid transparent; transition: border-color .15s, color .15s; }
   .hero-meta a:hover{ color: var(--green); border-color: var(--green); }
@@ -148,12 +148,12 @@
   .readout-row .k{ color: var(--text-faint); }
   .readout-row .v{ color: var(--text); }
   .readout-row .v.ok{ color: var(--green); }
-  .bar-track{ width:90px; height:5px; background:#0A0E13; border-radius:3px; overflow:hidden; border:1px solid var(--line); }
-  .bar-fill{ height:100%; background: linear-gradient(90deg, var(--green), #7CFFA0); border-radius:3px; }
+  .bar-track{ display:block; width:90px; height:5px; background:#0A0E13; border-radius:3px; overflow:hidden; border:1px solid var(--line); }
+  .bar-fill{ display:block; height:100%; background: linear-gradient(90deg, var(--green), #7CFFA0); border-radius:3px; }
 
   /* ---------- Section shell ---------- */
-  section{ position:relative; z-index:1; max-width:1180px; margin:0 auto; padding: 60px 28px; }
-  .section-head{ display:flex; align-items:baseline; gap:14px; margin-bottom: 36px; }
+  section{ position:relative; z-index:1; max-width:1180px; margin:0 auto; padding: 44px 28px; }
+  .section-head{ display:flex; align-items:baseline; gap:14px; margin-bottom: 26px; }
   .section-num{ font-family:var(--mono); font-size:12px; color: var(--text-faint); }
   .section-title{ font-family: var(--mono); font-weight:700; font-size: 1.5rem; color:#fff; letter-spacing:-0.01em; }
   .section-rule{ flex:1; height:1px; background: var(--line); }
@@ -166,7 +166,7 @@
     background: var(--panel);
     border:1px solid var(--line);
     border-radius: 10px;
-    padding: 22px;
+    padding: 20px;
     position: relative;
     overflow:hidden;
     transition: border-color .2s ease, transform .2s ease, background .2s ease;
@@ -179,18 +179,20 @@
   .module:hover{ border-color: rgba(57,255,106,0.45); transform: translateY(-3px); }
   .module:hover::after{ opacity:1; }
 
-  .module-top{ display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+  .module-top{ display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
   .module-code{ font-family: var(--mono); font-size:11px; letter-spacing:0.08em; color: var(--text-faint); }
   .module-led{ width:7px; height:7px; border-radius:50%; background: var(--green); box-shadow:0 0 6px 1px rgba(57,255,106,0.65); }
 
   .module h3{ font-family: var(--mono); font-size: 15.5px; color:#fff; font-weight:600; margin-bottom:10px; letter-spacing:-0.01em; }
-  .module p{ font-size: 13.5px; color: var(--text-dim); margin-bottom: 16px; }
+  .module p{ font-size: 13.5px; color: var(--text-dim); margin-bottom: 18px; }
 
-  .module-gauge{ display:flex; align-items:center; gap:10px; }
-  .gauge-track{ flex:1; height:4px; background:#0A0E13; border-radius:3px; overflow:hidden; border:1px solid var(--line); }
+  .module-gauge{ display:flex; flex-direction:column; gap:7px; }
+  .gauge-meta{ display:flex; justify-content:space-between; align-items:baseline; }
+  .gauge-label{ font-family: var(--mono); font-size:10.5px; color: var(--text-faint); letter-spacing:0.06em; }
+  .gauge-pct{ font-family: var(--mono); font-size:11px; color: var(--green); font-weight:600; }
+  .gauge-track{ width:100%; height:6px; background:#0A0E13; border-radius:3px; overflow:hidden; border:1px solid var(--line); }
   .gauge-fill{ height:100%; background: linear-gradient(90deg, var(--amber), var(--green)); border-radius:3px; width:0%; transition: width 1.1s cubic-bezier(.2,.8,.2,1); }
   .module.in-view .gauge-fill{ width: var(--lvl); }
-  .gauge-label{ font-family: var(--mono); font-size:10.5px; color: var(--text-faint); white-space:nowrap; }
 
   /* ---------- Timeline (experience) ---------- */
   .timeline{ display:flex; flex-direction:column; gap:0; }
@@ -296,11 +298,11 @@
     <div class="readout-row"><span class="k">EXCHANGE PROGRAM</span><span class="v">The Hague, NL</span></div>
     <div class="readout-row">
       <span class="k">CORE SYSTEMS</span>
-      <span class="bar-track"><span class="bar-fill" style="width:92%;"></span></span>
+      <span class="bar-track"><span class="bar-fill" style="width:100%;"></span></span>
     </div>
     <div class="readout-row">
       <span class="k">ROBOT PROGRAMMING</span>
-      <span class="bar-track"><span class="bar-fill" style="width:85%;"></span></span>
+      <span class="bar-track"><span class="bar-fill" style="width:100%;"></span></span>
     </div>
   </div>
 </header>
@@ -322,9 +324,7 @@
       <h3>Programmable Logic Controller</h3>
       <p>Desain, pemrograman, dan troubleshooting PLC Mitsubishi &amp; Omron untuk sistem otomasi produksi.</p>
       <div class="module-gauge">
-        <span class="gauge-track"><span class="gauge-fill"></span></span>
-        <span class="gauge-label">PROFICIENT</span>
-      </div>
+        <div class="gauge-meta"><span class="gauge-label">PROFICIENT</span><span class="gauge-pct">94%</span></div><span class="gauge-track"><span class="gauge-fill"></span></span></div>
     </div>
 
     <div class="module" style="--lvl:90%">
@@ -335,9 +335,7 @@
       <h3>Servo Motor Systems</h3>
       <p>Konfigurasi &amp; pemrograman servo drive CMMT, CMMB, dan MR J4 Series untuk clamping &amp; positioning presisi.</p>
       <div class="module-gauge">
-        <span class="gauge-track"><span class="gauge-fill"></span></span>
-        <span class="gauge-label">PROFICIENT</span>
-      </div>
+        <div class="gauge-meta"><span class="gauge-label">PROFICIENT</span><span class="gauge-pct">90%</span></div><span class="gauge-track"><span class="gauge-fill"></span></span></div>
     </div>
 
     <div class="module" style="--lvl:85%">
@@ -348,9 +346,7 @@
       <h3>Pneumatic Systems</h3>
       <p>Desain rangkaian pneumatik, integrasi logika kontrol, dan troubleshooting fault pada mesin otomatis.</p>
       <div class="module-gauge">
-        <span class="gauge-track"><span class="gauge-fill"></span></span>
-        <span class="gauge-label">SKILLED</span>
-      </div>
+        <div class="gauge-meta"><span class="gauge-label">SKILLED</span><span class="gauge-pct">85%</span></div><span class="gauge-track"><span class="gauge-fill"></span></span></div>
     </div>
 
     <div class="module" style="--lvl:88%">
@@ -361,9 +357,7 @@
       <h3>Python Programming</h3>
       <p>Otomasi, pemrosesan data, dan aplikasi vision menggunakan OpenCV, NumPy, dan Tkinter.</p>
       <div class="module-gauge">
-        <span class="gauge-track"><span class="gauge-fill"></span></span>
-        <span class="gauge-label">STRONG</span>
-      </div>
+        <div class="gauge-meta"><span class="gauge-label">STRONG</span><span class="gauge-pct">88%</span></div><span class="gauge-track"><span class="gauge-fill"></span></span></div>
     </div>
 
     <div class="module" style="--lvl:86%">
@@ -374,9 +368,7 @@
       <h3>Robot Programming</h3>
       <p>Pemrograman &amp; konfigurasi robot Omron TM12 dan Doosan 6-axis untuk spot welding dan pick-and-place.</p>
       <div class="module-gauge">
-        <span class="gauge-track"><span class="gauge-fill"></span></span>
-        <span class="gauge-label">EXPERIENCED</span>
-      </div>
+        <div class="gauge-meta"><span class="gauge-label">EXPERIENCED</span><span class="gauge-pct">86%</span></div><span class="gauge-track"><span class="gauge-fill"></span></span></div>
     </div>
 
     <div class="module" style="--lvl:75%">
@@ -387,9 +379,7 @@
       <h3>Microcontroller / IoT</h3>
       <p>Pengembangan sistem sensor pintar dan machine interfacing berbasis Arduino.</p>
       <div class="module-gauge">
-        <span class="gauge-track"><span class="gauge-fill"></span></span>
-        <span class="gauge-label">EXPERIENCED</span>
-      </div>
+        <div class="gauge-meta"><span class="gauge-label">EXPERIENCED</span><span class="gauge-pct">75%</span></div><span class="gauge-track"><span class="gauge-fill"></span></span></div>
     </div>
 
     <div class="module" style="--lvl:78%">
@@ -400,9 +390,7 @@
       <h3>Visual Basic Application</h3>
       <p>Pengembangan custom HMI untuk antarmuka perangkat eksternal melalui komunikasi serial.</p>
       <div class="module-gauge">
-        <span class="gauge-track"><span class="gauge-fill"></span></span>
-        <span class="gauge-label">SKILLED</span>
-      </div>
+        <div class="gauge-meta"><span class="gauge-label">SKILLED</span><span class="gauge-pct">78%</span></div><span class="gauge-track"><span class="gauge-fill"></span></span></div>
     </div>
 
     <div class="module" style="--lvl:90%">
@@ -413,9 +401,7 @@
       <h3>Leadership &amp; Teamwork</h3>
       <p>Kolaborasi dan tanggung jawab kuat dalam tim engineering lintas fungsi.</p>
       <div class="module-gauge">
-        <span class="gauge-track"><span class="gauge-fill"></span></span>
-        <span class="gauge-label">STRONG</span>
-      </div>
+        <div class="gauge-meta"><span class="gauge-label">STRONG</span><span class="gauge-pct">90%</span></div><span class="gauge-track"><span class="gauge-fill"></span></span></div>
     </div>
 
   </div>
