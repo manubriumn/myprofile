@@ -79,6 +79,8 @@
   @keyframes blink{ 0%,100%{opacity:1;} 50%{opacity:0.35;} }
   .statusbar .divider{ width:1px; height:12px; background:var(--line); }
   .statusbar .right span.id{ color: var(--text-faint); }
+  .statusbar .visits{ display:flex; align-items:center; gap:6px; }
+  .visit-badge{ height:14px; display:block; filter: brightness(1.05); border-radius:2px; }
 
   /* ---------- Hero ---------- */
   .hero{
@@ -288,6 +290,8 @@
     <span>SYSTEM STATUS: OPERATIONAL</span>
   </div>
   <div class="right">
+    <span class="visits"><img class="visit-badge" src="https://api.visitorbadge.io/api/VisitorHit?user=manubriumn&repo=myprofile&countColor=%2339FF6A&labelColor=%230D1117&color=%230D1117" alt="visit count" onerror="this.style.display='none';" /></span>
+    <span class="divider"></span>
     <span class="id">REF // IHY-2026</span>
     <span class="divider"></span>
     <span>KARAWANG, ID</span>
