@@ -179,6 +179,24 @@
   .module:hover{ border-color: rgba(57,255,106,0.45); transform: translateY(-3px); }
   .module:hover::after{ opacity:1; }
 
+  .module.scan-active{
+    border-color: rgba(57,255,106,0.65);
+    box-shadow: 0 0 0 1px rgba(57,255,106,0.25), 0 0 28px -6px rgba(57,255,106,0.45);
+    transform: translateY(-3px);
+    transition: border-color .5s ease, box-shadow .5s ease, transform .5s ease;
+  }
+  .module.scan-active::after{ opacity:1; }
+  .module.scan-settle{
+    transition: border-color 1.4s ease, box-shadow 1.4s ease, transform 1.4s ease;
+  }
+  .module.scan-active .module-led{
+    animation: ledpulse 1.1s ease-in-out infinite;
+  }
+  @keyframes ledpulse{
+    0%,100%{ box-shadow:0 0 6px 1px rgba(57,255,106,0.65); }
+    50%{ box-shadow:0 0 12px 4px rgba(57,255,106,0.95); }
+  }
+
   .module-top{ display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
   .module-code{ font-family: var(--mono); font-size:11px; letter-spacing:0.08em; color: var(--text-faint); }
   .module-led{ width:7px; height:7px; border-radius:50%; background: var(--green); box-shadow:0 0 6px 1px rgba(57,255,106,0.65); }
@@ -190,8 +208,8 @@
   .gauge-meta{ display:flex; justify-content:space-between; align-items:baseline; }
   .gauge-label{ font-family: var(--mono); font-size:10.5px; color: var(--text-faint); letter-spacing:0.06em; }
   .gauge-pct{ font-family: var(--mono); font-size:11px; color: var(--green); font-weight:600; }
-  .gauge-track{ width:100%; height:6px; background:#0A0E13; border-radius:3px; overflow:hidden; border:1px solid var(--line); }
-  .gauge-fill{ height:100%; background: linear-gradient(90deg, var(--amber), var(--green)); border-radius:3px; width:0%; transition: width 1.1s cubic-bezier(.2,.8,.2,1); }
+  .gauge-track{ display:block; width:100%; height:6px; background:#0A0E13; border-radius:3px; overflow:hidden; border:1px solid var(--line); }
+  .gauge-fill{ display:block; height:100%; background: linear-gradient(90deg, var(--amber), var(--green)); border-radius:3px; width:0%; transition: width 1.1s cubic-bezier(.2,.8,.2,1); }
   .module.in-view .gauge-fill{ width: var(--lvl); }
 
   /* ---------- Timeline (experience) ---------- */
@@ -293,17 +311,10 @@
   </div>
 
   <div class="readout">
+    <div class="readout-row"><span class="k">AGE</span><span class="v">23</span></div>
+    <div class="readout-row"><span class="k">DOB</span><span class="v">9 June 2003</span></div>
     <div class="readout-row"><span class="k">GPA</span><span class="v ok">3.61 / 4.00</span></div>
-    <div class="readout-row"><span class="k">TOEIC SCORE</span><span class="v">890 / 990</span></div>
-    <div class="readout-row"><span class="k">EXCHANGE PROGRAM</span><span class="v">The Hague, NL</span></div>
-    <div class="readout-row">
-      <span class="k">CORE SYSTEMS</span>
-      <span class="bar-track"><span class="bar-fill" style="width:100%;"></span></span>
-    </div>
-    <div class="readout-row">
-      <span class="k">ROBOT PROGRAMMING</span>
-      <span class="bar-track"><span class="bar-fill" style="width:100%;"></span></span>
-    </div>
+    <div class="readout-row"><span class="k">TOTAL WORK EXPERIENCE</span><span class="v">2 Years</span></div>
   </div>
 </header>
 
@@ -512,13 +523,28 @@
 </footer>
 
 <script>
-  // Reveal gauge fills when modules scroll into view
+  // Reveal gauge fills + scan-glow when modules scroll into view
   const modules = document.querySelectorAll('.module');
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{
+      const el = e.target;
       if(e.isIntersecting){
-        e.target.classList.add('in-view');
-        io.unobserve(e.target);
+        el.classList.add('in-view'); // keeps gauge fill permanently revealed
+        // re-trigger the glow scan each time it re-enters view
+        clearTimeout(el._scanTimer);
+        el.classList.remove('scan-settle');
+        // force reflow so the transition restarts cleanly if re-triggered fast
+        void el.offsetWidth;
+        el.classList.add('scan-active');
+        el._scanTimer = setTimeout(()=>{
+          el.classList.add('scan-settle');
+          el.classList.remove('scan-active');
+        }, 900);
+      } else {
+        // leaving the viewport: let it settle back to idle so it can glow again on return
+        clearTimeout(el._scanTimer);
+        el.classList.add('scan-settle');
+        el.classList.remove('scan-active');
       }
     });
   }, { threshold: 0.3 });
