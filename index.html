@@ -124,6 +124,32 @@
   .hero-meta a{ color: var(--text-dim); text-decoration:none; border-bottom:1px solid transparent; transition: border-color .15s, color .15s; }
   .hero-meta a:hover{ color: var(--green); border-color: var(--green); }
 
+  /* hero right column wrapper */
+  .hero-right{
+    display:flex; flex-direction:column; gap:18px;
+  }
+
+  /* photo */
+  .hero-photo{
+    width:100%; aspect-ratio:4/3; object-fit:cover;
+    border-radius:10px;
+    border:1px solid var(--line);
+    display:block;
+    box-shadow: 0 20px 60px -20px rgba(0,0,0,0.6);
+    background: var(--panel-2);
+  }
+  .hero-photo-placeholder{
+    width:100%; aspect-ratio:4/3;
+    border-radius:10px;
+    border:1px dashed var(--line);
+    background: var(--panel);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:10px;
+    color: var(--text-faint); font-family: var(--mono); font-size:11px; letter-spacing:0.08em;
+    box-shadow: 0 20px 60px -20px rgba(0,0,0,0.6);
+  }
+  .hero-photo-placeholder svg{ opacity:0.3; }
+
   /* readout panel on hero right */
   .readout{
     background: linear-gradient(180deg, var(--panel), var(--panel-2));
@@ -264,6 +290,8 @@
 
   @media (max-width: 880px){
     .hero{ grid-template-columns:1fr; padding-top:50px; }
+    .hero-photo{ aspect-ratio:16/9; }
+    .hero-photo-placeholder{ aspect-ratio:16/9; }
     .modules{ grid-template-columns: 1fr 1fr; }
     .split{ grid-template-columns: 1fr; }
     .tl-item{ grid-template-columns: 1fr; gap:8px; }
@@ -314,11 +342,25 @@
     </div>
   </div>
 
-  <div class="readout">
-    <div class="readout-row"><span class="k">AGE</span><span class="v">23</span></div>
-    <div class="readout-row"><span class="k">DOB</span><span class="v">9 June 2003</span></div>
-    <div class="readout-row"><span class="k">GPA</span><span class="v ok">3.61 / 4.00</span></div>
-    <div class="readout-row"><span class="k">TOTAL WORK EXPERIENCE</span><span class="v">2 Years</span></div>
+  <div class="hero-right">
+
+    <!-- Profile photo — rename your photo to "photo.jpg" and put it in the repo root -->
+    <img class="hero-photo" src="photo.jpg"
+         alt="Ibnu Haafizha Yoga"
+         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+    <div class="hero-photo-placeholder" style="display:none;">
+      <svg width="40" height="40" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2">
+        <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+      </svg>
+      <span>photo.jpg</span>
+    </div>
+
+    <div class="readout">
+      <div class="readout-row"><span class="k">AGE</span><span class="v">23</span></div>
+      <div class="readout-row"><span class="k">GPA</span><span class="v ok">3.61 / 4.00</span></div>
+      <div class="readout-row"><span class="k">TOTAL WORK EXPERIENCE</span><span class="v">2 Years</span></div>
+    </div>
+
   </div>
 </header>
 
